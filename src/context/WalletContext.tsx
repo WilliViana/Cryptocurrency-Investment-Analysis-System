@@ -26,13 +26,14 @@ const walletReducer = (state: WalletState, action: WalletAction): WalletState =>
           holding.cryptoId === action.payload.cryptoId ? action.payload : holding
         ),
       };
-    case 'REMOVE_HOLDING':
+    case 'REMOVE_HOLDING': {
       const holdingToRemove = state.holdings.find(h => h.cryptoId === action.payload);
       return {
         ...state,
         holdings: state.holdings.filter((holding) => holding.cryptoId !== action.payload),
         totalInvestment: state.totalInvestment - (holdingToRemove?.initialInvestment || 0),
       };
+    }
     default:
       return state;
   }
